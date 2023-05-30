@@ -13,19 +13,22 @@
 
                 <div th:if="!${#request.userPrincipal}">
                     <ul class="nav">
-                        <li class="nav-item"><a href="/login" class="nav-link link-dark px-2">Войти</a></li>
-                        <li class="nav-item"><a href="/registration" class="nav-link link-dark px-2">Регистрация</a>
-                        </li>
+<!--                        <li class="nav-item"><a href="/login" class="nav-link link-dark px-2">Войти</a></li>-->
+                        <li class="nav-item"><a href="/registration" class="nav-link link-dark px-2">Регистрация</a></li>
+                        <form action="/login" >
+                            <button type="submit" class="btn btn-dark">Войти</button>
+                        </form>
                     </ul>
                 </div>
 
                 <div th:if="${#request.isUserInRole('ROLE_USER')}">
                     <ul class="nav">
-                    </ul>
+
                     <li class="nav-item"><a href="/profile" class="nav-link link-dark px-2">Мой профиль</a></li>
                     <form th:action="@{/logout}" th:object="${user}" th:method="post">
                         <button type="submit" class="btn btn-dark">Выйти</button>
                     </form>
+                    </ul>
                 </div>
 
             </ul>
