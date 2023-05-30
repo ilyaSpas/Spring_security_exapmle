@@ -1,13 +1,32 @@
-<div th:fragment="header" >
+<div th:fragment="header">
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav">
+    <nav class="py-2 bg-body-tertiary border-bottom">
+        <div class="container d-flex flex-wrap">
+            <ul class="nav me-auto">
                 <a class="nav-item nav-link active" href="/">Главная</a>
                 <a class="nav-item nav-link" href="/blog">Блог</a>
                 <a class="nav-item nav-link" href="/contacts">Контакты</a>
                 <a class="nav-item nav-link" href="/about">О нас</a>
-            </div>
+            </ul>
+
+            <ul class="nav">
+
+                <div th:if="!${#request.userPrincipal}">
+                    <ul class="nav">
+                        <li class="nav-item"><a href="/login" class="nav-link link-dark px-2">Войти</a></li>
+                        <li class="nav-item"><a href="/registration" class="nav-link link-dark px-2">Регистрация</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div th:if="${#request.isUserInRole('ROLE_USER')}">
+                    <ul class="nav">
+                    <li class="nav-item"><a href="/profile" class="nav-link link-dark px-2">Мой профиль</a></li>
+                    <li class="nav-item"><a href="/logout" class="nav-link link-dark px-2">Выйти</a></li>
+                    </ul>
+                </div>
+
+            </ul>
         </div>
     </nav>
 
