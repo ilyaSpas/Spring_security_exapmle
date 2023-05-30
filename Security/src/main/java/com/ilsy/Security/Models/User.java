@@ -7,6 +7,9 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.HashSet;
@@ -18,13 +21,18 @@ public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
+    @NotEmpty(message = "Введите ваш email*")
+    @Email(message = "Введите вашу почту в формате: example@mail.ru")
     private String email;
+    @NotEmpty(message = "Введите ваш номер телефона*")
     private String phoneNumber;
+    @NotEmpty(message = "Введите ваше имя*")
     private String name;
     //    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 //    @JoinColumn(name = "image_id")
 //    @Column(name = "avatar")
 //    private Image avatar;
+    @NotEmpty(message = "Введите ваш пароль*")
     private String password;
     private boolean active;
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
