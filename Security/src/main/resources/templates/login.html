@@ -13,6 +13,8 @@
 <header th:insert="blocks/header :: header"></header>
 <div class="container">
 
+
+
     <h2>Вход</h2><br>
     <form th:action="@{/login}" th:object="${user}" th:method="post">
         <input type="text" name="username" placeholder="Введите вашу почту" class="form-control"><br>
@@ -20,6 +22,10 @@
         <button type="submit" class="btn btn-dark">Войти</button>
     </form><br>
     <a href="/registration">Регистрация</a>
+
+    <div th:if="${param.error}" style="color:red">
+        Неверный логин или пароль
+    </div>
 
 
 </div>
