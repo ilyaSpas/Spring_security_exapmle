@@ -14,12 +14,13 @@
 <div class="container">
 
     <h2>Вход</h2><br>
-    <form action="/login" method="post">
+    <form th:action="@{/login}" th:object="${user}" th:method="post">
         <input type="text" name="username" placeholder="Введите вашу почту" class="form-control"><br>
         <input type="password" name="password" placeholder="Введите ваш пароль" class="form-control"><br>
-        <input type="submit" value="Войти">
+        <button type="submit" class="btn btn-dark">Войти</button>
     </form><br>
     <a href="/registration">Регистрация</a>
+
 
 </div>
 <footer th:insert="blocks/footer :: footer"></footer>

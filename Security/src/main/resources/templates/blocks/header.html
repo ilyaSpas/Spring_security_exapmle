@@ -21,9 +21,11 @@
 
                 <div th:if="${#request.isUserInRole('ROLE_USER')}">
                     <ul class="nav">
-                    <li class="nav-item"><a href="/profile" class="nav-link link-dark px-2">Мой профиль</a></li>
-                    <li class="nav-item"><a href="/logout" class="nav-link link-dark px-2">Выйти</a></li>
                     </ul>
+                    <li class="nav-item"><a href="/profile" class="nav-link link-dark px-2">Мой профиль</a></li>
+                    <form th:action="@{/logout}" th:object="${user}" th:method="post">
+                        <button type="submit" class="btn btn-dark">Выйти</button>
+                    </form>
                 </div>
 
             </ul>

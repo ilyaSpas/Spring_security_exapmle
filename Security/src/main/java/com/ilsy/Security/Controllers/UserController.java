@@ -12,11 +12,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 @RequiredArgsConstructor
 public class UserController {
+
     private final UserService userService;
-//    @GetMapping("/login")
-//    public String login(){
-//        return "login";
-//    }
+
+    @GetMapping("/login")
+    public String login(){
+        return "login";
+    }
+
     @GetMapping("/registration")
     public String registration(User user){
         return "registration";
