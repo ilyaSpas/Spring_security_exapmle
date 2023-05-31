@@ -1,6 +1,8 @@
 package com.ilsy.Security.Controllers;
 
+import com.ilsy.Security.Models.Post;
 import com.ilsy.Security.Models.User;
+import com.ilsy.Security.Services.PostService;
 import com.ilsy.Security.Services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -11,12 +13,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
+import java.security.Principal;
 
 @Controller
 @RequiredArgsConstructor
 public class UserController {
 
     private final UserService userService;
+    private final PostService postService;
 
     @GetMapping("/login")
     public String login(){
@@ -41,5 +45,18 @@ public class UserController {
 //        }
         }
         return "redirect:/login";
+    }
+
+
+    //=========================================================================
+
+    @GetMapping("blog/add")
+    public String addPost(Post post){
+        return "addPost";
+    }
+    @PostMapping("blog/add")
+    public String addNewPost(@ModelAttribute Post post, Principal principal) {
+            postService.savePost(principal, post);
+        return "redirect:/blog";
     }
 }

@@ -13,7 +13,16 @@
 <header th:insert="blocks/header :: header"></header>
 <div class="container">
 
+
     <h2>Блог</h2>
+    <a href="/blog/add">Добавить пост</a>
+    <div th:each="el : ${posts}" class="alert alert-info mr-2">
+        <h3 th:text="${el.title}"></h3>
+        <p th:text="${el.anons}"></p>
+        <p th:text="${el.dateOfCreate}"></p>
+        <p th:text="${el.user.name}"></p>
+    </div>
+
 
 </div>
 <footer th:insert="blocks/footer :: footer"></footer>
