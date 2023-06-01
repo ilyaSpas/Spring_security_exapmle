@@ -25,7 +25,6 @@ public class Post {
 
     @PrePersist
     private void init(){
-
         dateOfCreate = LocalDateTime.now();
     }
 }

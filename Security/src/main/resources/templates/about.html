@@ -13,6 +13,8 @@
 <header th:insert="blocks/header :: header"></header>
 <div class="container">
 
+    <p th:if="${user!=null}" th:text="'Авторизованный пользователь: ' + ${user?.name}"></p>
+
     <h2>О нас</h2>
 
 </div>

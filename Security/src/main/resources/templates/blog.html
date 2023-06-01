@@ -10,21 +10,35 @@
     <title>Блог</title>
 </head>
 <body>
+
 <header th:insert="blocks/header :: header"></header>
+
 <div class="container">
 
+    <p th:if="${user!=null}" th:text="'Авторизованный пользователь: ' + ${userAuth?.name}"></p>
+
+    <br>
+    <div class="position-relative">
+        <div class="position-absolute top-0 end-0">
+            <form action="/blog/add">
+                <button type="submit" class="btn btn-dark">Добавить статью</button>
+            </form>
+        </div>
+    </div>
+    <br>
 
     <h2>Блог</h2>
-    <a href="/blog/add">Добавить пост</a>
+
     <div th:each="el : ${posts}" class="alert alert-info mr-2">
         <h3 th:text="${el.title}"></h3>
         <p th:text="${el.anons}"></p>
-        <p th:text="${el.dateOfCreate}"></p>
-        <p th:text="${el.user.name}"></p>
+        <p th:text="'Дата создания: ' + ${el.dateOfCreate}"></p>
+        <p th:text="'Автор: ' + ${el.user.name}"></p>
     </div>
 
-
 </div>
+
 <footer th:insert="blocks/footer :: footer"></footer>
+
 </body>
 </html>
