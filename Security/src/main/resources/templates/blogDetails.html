@@ -18,26 +18,20 @@
     <p th:if="${user!=null}" th:text="'Авторизованный пользователь: ' + ${userAuth?.name}"></p>
 
     <br>
-    <div class="position-relative">
-        <div class="position-absolute top-0 end-0">
-            <form action="/blog/add">
-                <button type="submit" class="btn btn-dark">Добавить статью</button>
-            </form>
-        </div>
-    </div>
-    <br>
-
-    <h2>Блог</h2>
-
-    <div th:each="el : ${posts}" class="alert alert-info mr-2">
+    <div th:each="el : ${post}" class="alert alert-info mr-2">
         <h3 th:text="${el.title}"></h3>
         <p th:text="${el.anons}"></p>
+        <p th:text="${el.text}"></p>
         <p th:text="'Дата создания: ' + ${el.dateOfCreate}" class="fw-lighter" ></p>
         <p th:text="'Автор: ' + ${el.user.name}" class="fw-lighter" ></p>
-        <a th:href="'/blog/' + ${el.id}" class="btn btn-dark">Детальнее</a>
+        <a th:href="'/blog/' + ${el.id} + '/edit'" class="btn btn-dark">Редактировать</a>
+        <br>
+        <br>
+        <form th:action="'/blog/' + ${el.id} + '/remote'" method="post">
+            <button th:href="'/blog/' + ${el.id} + '/remove'" class="btn btn-dark" type="submit">Удаление</button>
+        </form>
     </div>
-
-</div>
+    <a href="/blog">Назад</a>
 
 <footer th:insert="blocks/footer :: footer"></footer>
 
