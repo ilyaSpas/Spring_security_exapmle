@@ -22,6 +22,8 @@
             <textarea name="text" th:text="${el.text}" class="form-control"/><br>
             <button type="submit" class="btn btn-dark">Обновить</button>
         </form>
+        <br>
+        <a th:href="'/blog/' + ${el.id}">Назад</a>
     </div>
 </div>
 

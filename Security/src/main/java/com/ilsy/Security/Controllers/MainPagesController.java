@@ -75,7 +75,7 @@ public class MainPagesController {
         post.setAnons(anons);
         post.setText(text);
         postRepository.save(post);
-        return "redirect:/blog";
+        return "redirect:/blog/{id}";
     }
 
 
