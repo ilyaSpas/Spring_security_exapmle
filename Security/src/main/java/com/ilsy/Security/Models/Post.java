@@ -5,7 +5,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @Entity
 @Data
@@ -18,14 +21,16 @@ public class Post {
     private String title;
     private String anons;
     private String text;
-    private LocalDateTime dateOfCreate;
+    private String dateOfCreate;
     @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
     @JoinColumn
     private User user;
 
     @PrePersist
     private void init(){
-        dateOfCreate = LocalDateTime.now();
+        DateFormat SimpleDate = new SimpleDateFormat("HH:mm:ss dd.MM.yyyy");
+        Date date = new Date();
+        dateOfCreate = SimpleDate.format(date);
     }
 }
 
