@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -32,8 +32,8 @@
     <div th:each="el : ${posts}" class="alert alert-info mr-2">
         <h3 th:text="${el.title}"></h3>
         <p th:text="${el.anons}"></p>
-        <p th:text="'Дата создания: ' + ${el.dateOfCreate}"></p>
-        <p th:text="'Автор: ' + ${el.user.name}"></p>
+        <p th:text="'Дата создания: ' + ${el.dateOfCreate}" class="fw-lighter" ></p>
+        <p th:text="'Автор: ' + ${el.user.name}" class="fw-lighter" ></p>
     </div>
 
 </div>
