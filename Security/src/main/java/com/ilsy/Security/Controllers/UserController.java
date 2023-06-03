@@ -54,6 +54,7 @@ public class UserController {
     public String addPost(Post post){
         return "addPost";
     }
+
     @PostMapping("blog/add")
     public String addNewPost(@ModelAttribute Post post, Principal principal) {
             postService.savePost(principal, post);

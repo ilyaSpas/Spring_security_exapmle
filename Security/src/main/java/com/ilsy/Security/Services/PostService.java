@@ -1,7 +1,9 @@
 package com.ilsy.Security.Services;
 
+import com.ilsy.Security.Models.Comment;
 import com.ilsy.Security.Models.Post;
 import com.ilsy.Security.Models.User;
+import com.ilsy.Security.Repo.CommentRepository;
 import com.ilsy.Security.Repo.PostRepository;
 import com.ilsy.Security.Repo.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +20,7 @@ public class PostService {
 
     private final PostRepository postRepository;
     private final UserRepository userRepository;
+    private final CommentRepository commentRepository;
 
     public void savePost(Principal principal, Post post){
         post.setUser(getUserByPrincipal(principal));
@@ -29,5 +32,10 @@ public class PostService {
             return new User();
         }
         return userRepository.findByEmail(principal.getName());
+    }
+
+    public void saveComment(Comment comment, Post post){
+        comment.setPost(post);
+        commentRepository.save(comment);
     }
 }

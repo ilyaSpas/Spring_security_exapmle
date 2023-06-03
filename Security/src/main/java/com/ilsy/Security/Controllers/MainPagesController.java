@@ -1,5 +1,6 @@
 package com.ilsy.Security.Controllers;
 
+import com.ilsy.Security.Models.Comment;
 import com.ilsy.Security.Models.Post;
 import com.ilsy.Security.Repo.PostRepository;
 import com.ilsy.Security.Repo.UserRepository;
@@ -7,10 +8,7 @@ import com.ilsy.Security.Services.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.ArrayList;
@@ -22,6 +20,7 @@ public class MainPagesController {
     private final PostRepository postRepository;
     private final PostService postService;
     private final UserRepository userRepository;
+
 
     @GetMapping("/")
     public String mainPage(Model model, Principal principal) {
@@ -46,10 +45,14 @@ public class MainPagesController {
         if (!postRepository.existsById(id)) {
             return "redirect:/blog";
         }
-        Optional<Post> news = postRepository.findById(id);
+
+        Optional<Post> post = postRepository.findById(id);
         ArrayList<Post> res = new ArrayList<>();
-        news.ifPresent(res::add);
+        post.ifPresent(res::add);
         model.addAttribute("post", res);
+
+        Post post1 = postRepository.getById(id);
+        model.addAttribute("comments", post1.getComments());
         return "blogDetails";
     }
 
@@ -77,6 +80,21 @@ public class MainPagesController {
         postRepository.save(post);
         return "redirect:/blog/{id}";
     }
+
+
+    @PostMapping("/blog/{id}/comment")
+    public String addNewComment(@PathVariable(value = "id") long id,
+                                @RequestParam String text) {
+        Comment comment = new Comment();
+        Post post = postRepository.getById(id);
+        comment.setText(text);
+        postService.saveComment(comment, post);
+        return "redirect:/blog/{id}";
+    }
+
+
+
+
 
 
 

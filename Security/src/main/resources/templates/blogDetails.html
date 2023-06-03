@@ -22,29 +22,38 @@
         <h3 th:text="${el.title}"></h3>
         <p th:text="${el.anons}"></p>
         <p th:text="${el.text}"></p>
-        <p th:text="'Дата создания: ' + ${el.dateOfCreate}" class="fw-lighter" ></p>
-        <p th:text="'Автор: ' + ${el.user.name}" class="fw-lighter" ></p>
+        <p th:text="'Дата создания: ' + ${el.dateOfCreate}" class="fw-lighter"></p>
+        <p th:text="'Автор: ' + ${el.user.name}" class="fw-lighter"></p>
         <a th:href="'/blog/' + ${el.id} + '/edit'" class="btn btn-dark">Редактировать</a>
         <br>
         <br>
         <form th:action="'/blog/' + ${el.id} + '/remote'" method="post">
             <button th:href="'/blog/' + ${el.id} + '/remove'" class="btn btn-dark" type="submit">Удаление</button>
         </form>
-    </div>
-    <a href="/blog">Назад</a>
 
-    <h3>Комментарии</h3>
-    <div class="alert alert-info mr-2 container">
-        <div>
-            <h4>Добавить комментарий</h4>
-            <form action="" method="post">
-                <textarea name="text" placeholder="Введите Ваш комментарий"></textarea><br>
-                <button type="submit" class="btn btn-dark">Отправить</button>
-            </form>
+        <a href="/blog">Назад</a>
+
+        <h3>Комментарии</h3>
+        <div class="alert alert-info mr-2 container">
+            <div>
+                <h4>Добавить комментарий</h4>
+                <form th:action="'/blog/' + ${el.id} + '/comment'" th:method="post">
+                    <input name="text" placeholder="Введите Ваш комментарий"></input><br>
+                    <button type="submit" class="btn btn-dark">Отправить</button>
+                </form>
+            </div>
+
+            <div th:each="comment : ${comments}" >
+                    <hr>
+                <p th:text="${comment.text}" class="fw-lighter" ></p>
+                <p th:text="'Дата создания: ' + ${el.dateOfCreate}" class="fw-lighter" ></p>
+
+            </div>
+
         </div>
     </div>
 
-<footer th:insert="blocks/footer :: footer"></footer>
+    <footer th:insert="blocks/footer :: footer"></footer>
 
 </body>
 </html>
