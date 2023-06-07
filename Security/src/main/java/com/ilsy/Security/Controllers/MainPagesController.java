@@ -87,16 +87,14 @@ public class MainPagesController {
 
     @PostMapping("/blog/{id}/comment")
     public String addNewComment(@PathVariable(value = "id") long id,
-                                @RequestParam String text) {
+                                @RequestParam String text,
+                                Principal principal) {
         Comment comment = new Comment();
         Post post = postRepository.getById(id);
         comment.setText(text);
-        postService.saveComment(comment, post);
+        postService.saveComment(comment, post, principal);
         return "redirect:/blog/{id}";
     }
-
-
-
 
 
     @PostMapping("/blog/comment/{id}/remote")

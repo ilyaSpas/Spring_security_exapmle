@@ -34,7 +34,8 @@ public class PostService {
         return userRepository.findByEmail(principal.getName());
     }
 
-    public void saveComment(Comment comment, Post post){
+    public void saveComment(Comment comment, Post post, Principal principal){
+        comment.setAuthor(getUserByPrincipal(principal).getName());
         comment.setPost(post);
         commentRepository.save(comment);
     }

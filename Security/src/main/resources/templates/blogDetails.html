@@ -48,6 +48,7 @@
                 <p th:text="${comment.text}" class="fw-lighter"></p>
                 <!--                <p th:text="${comment.post.user.name}" class="fw-lighter" ></p>-->
                 <p th:text="'Дата создания: ' + ${el.dateOfCreate}" class="fw-lighter"></p>
+                <p th:text="'Автор: ' + ${comment.author}" class="fw-lighter"></p>
 
                 <form th:action="'/blog/comment/' + ${comment.id} + '/remote'" method="post">
                     <button class="btn btn-dark" type="submit">Удалить комментарий</button>

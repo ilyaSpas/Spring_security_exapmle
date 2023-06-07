@@ -19,9 +19,18 @@ public class Comment {
     private Long id;
     private String text;
     private String dateOfCreate;
+
+
     @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
     @JoinColumn
     private Post post;
+
+    private String author;
+
+//    @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
+//    @JoinColumn
+//    private User user;
+
     @PrePersist
     private void init(){
         DateFormat SimpleDate = new SimpleDateFormat("HH:mm:ss dd.MM.yyyy");

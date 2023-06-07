@@ -38,8 +38,21 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Set<Role> roles = new HashSet<>();
     private LocalDateTime dateOfCreate;
+
+
+
+
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "user")
     private List<Post> posts = new ArrayList<>();
+
+//    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "user")
+//    private List<Comment> comments = new ArrayList<>();
+
+
+
+
+
+
     // инициализируется при создании объекта этого класса
     @PrePersist
     private void init(){
