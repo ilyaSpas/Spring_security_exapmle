@@ -38,16 +38,20 @@
             <div>
                 <h4>Добавить комментарий</h4>
                 <form th:action="'/blog/' + ${el.id} + '/comment'" th:method="post">
-                    <input name="text" placeholder="Введите Ваш комментарий"></input><br>
+                    <input name="text" placeholder="Введите Ваш комментарий"/><br>
                     <button type="submit" class="btn btn-dark">Отправить</button>
                 </form>
             </div>
 
-            <div th:each="comment : ${comments}" >
-                    <hr>
-                <p th:text="${comment.text}" class="fw-lighter" ></p>
-                <p th:text="'Дата создания: ' + ${el.dateOfCreate}" class="fw-lighter" ></p>
+            <div th:each="comment : ${comments}">
+                <hr>
+                <p th:text="${comment.text}" class="fw-lighter"></p>
+                <!--                <p th:text="${comment.post.user.name}" class="fw-lighter" ></p>-->
+                <p th:text="'Дата создания: ' + ${el.dateOfCreate}" class="fw-lighter"></p>
 
+                <form th:action="'/blog/comment/' + ${comment.id} + '/remote'" method="post">
+                    <button class="btn btn-dark" type="submit">Удалить комментарий</button>
+                </form>
             </div>
 
         </div>

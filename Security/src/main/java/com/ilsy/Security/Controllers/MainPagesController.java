@@ -2,6 +2,7 @@ package com.ilsy.Security.Controllers;
 
 import com.ilsy.Security.Models.Comment;
 import com.ilsy.Security.Models.Post;
+import com.ilsy.Security.Repo.CommentRepository;
 import com.ilsy.Security.Repo.PostRepository;
 import com.ilsy.Security.Repo.UserRepository;
 import com.ilsy.Security.Services.PostService;
@@ -20,6 +21,7 @@ public class MainPagesController {
     private final PostRepository postRepository;
     private final PostService postService;
     private final UserRepository userRepository;
+    private final CommentRepository commentRepository;
 
 
     @GetMapping("/")
@@ -33,6 +35,7 @@ public class MainPagesController {
     public String blogPage(Model model, Principal principal) {
         Iterable<Post> posts = postRepository.findAll();
         model.addAttribute("posts", posts);
+
         model.addAttribute("user", principal);
         if(principal != null) {
             model.addAttribute("userAuth", userRepository.findByEmail(principal.getName()));
@@ -95,6 +98,13 @@ public class MainPagesController {
 
 
 
+
+    @PostMapping("/blog/comment/{id}/remote")
+    public String remoteComment(@PathVariable(value = "id") long id, Post post) {
+        Comment comment = commentRepository.findById(id).orElseThrow();
+        commentRepository.delete(comment);
+        return "redirect:/blog/" + comment.getPost().getId();
+    }
 
 
 
